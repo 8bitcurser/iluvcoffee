@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  db:
+    image: postgres:latest
+    container_name: iluvcoffee_db
+    restart: always
+    environment:
+      POSTGRES_USER: iluvcoffee
+      POSTGRES_PASSWORD: iluvcoffee
+      POSTGRES_DB: iluvcoffee_db
+    ports:
+      - "5432:5432"

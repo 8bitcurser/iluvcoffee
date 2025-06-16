@@ -5,7 +5,9 @@ import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe(
-    {whitelist: true, forbidNonWhitelisted: true, transform: true} 
+    {whitelist: true, forbidNonWhitelisted: true, transform: true, transformOptions: {
+      enableImplicitConversion: true, // permite la conversion implicita de tipos de datos
+    }}, 
     // permite solo los campos definidos en el DTO
     // filtra los campos que no estan definidos en el DTO
     // forbidNonWhitelisted: true
