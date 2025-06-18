@@ -8,6 +8,8 @@ import { DataSource, Repository } from 'typeorm';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { Event } from 'src/events/entities/event.entity';
 import { COFFEE_BRANDS } from './coffee.constants';
+import { ConfigType } from '@nestjs/config';
+import coffeesConfig from 'src/coffee-rating/coffees.config';
 
 
 @Injectable()
@@ -19,7 +21,11 @@ export class CoffeesService {
         private readonly flavorRepository: Repository<Flavor>, // Si se usa Flavor en el servicio, se debe inyectar
         private readonly dataSource: DataSource,
         @Inject(COFFEE_BRANDS) coffeBrands: string[], // Inyectamos el token COFFEE_BRANDS
-    ) {};
+        @Inject(coffeesConfig.KEY)
+        private readonly coffeesConfiguration: ConfigType<typeof coffeesConfig>, // Inyectamos ConfigService para acceder a las variables de entorno
+    ) { // Accedemos al objeto database del app.config.ts
+        console.log(coffeesConfig().foo);
+    };
 
 
     async findAll(paginationQueryDto: PaginationQueryDto) {
