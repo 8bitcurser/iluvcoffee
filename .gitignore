@@ -1,23 +1,13 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 2c505d7 (Include service and coffee controller)
+
 # compiled output
 /dist
 /node_modules
 /build
 
-<<<<<<< HEAD
->>>>>>> 2c505d7 (Include service and coffee controller)
-=======
->>>>>>> 2c505d7 (Include service and coffee controller)
 # Logs
 logs
 *.log
 npm-debug.log*
-<<<<<<< HEAD
-<<<<<<< HEAD
 yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
@@ -117,20 +107,15 @@ lerna-debug.log*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-<<<<<<< HEAD
->>>>>>> 2c505d7 (Include service and coffee controller)
-=======
->>>>>>> 2c505d7 (Include service and coffee controller)
+
 
 # dotenv environment variable files
-.env
+*.env
 .env.development.local
 .env.test.local
 .env.production.local
 .env.local
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 .parcel-cache
@@ -186,9 +171,6 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
-=======
-=======
->>>>>>> 2c505d7 (Include service and coffee controller)
 # temp directory
 .temp
 .tmp
@@ -201,7 +183,4 @@ pids
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
-<<<<<<< HEAD
->>>>>>> 2c505d7 (Include service and coffee controller)
-=======
->>>>>>> 2c505d7 (Include service and coffee controller)
+
