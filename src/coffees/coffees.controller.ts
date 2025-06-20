@@ -1,24 +1,35 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, Query} from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, Query, UseFilters, UseGuards, UseInterceptors, UsePipes, ValidationPipe} from '@nestjs/common';
 import { CoffeesService } from './coffees.service';
 import { CreateCoffeeDto } from './dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
+import { Public } from 'src/common/decorators/public.decorator';
+import { HttpExceptionFilter } from 'src/common/filters/http-exception.filter';
+import { ApiKeyGuard } from 'src/common/guards/api-key.guard';
+import { WrapResponseInterceptor } from 'src/common/interceptors/wrap-response.interceptor';
+import { ParseIntPipe } from 'src/common/pipes/parse-int/parse-int.pipe';
+import { Protocol } from 'src/common/decorators/protocol.decorator';
 
+// @UseInterceptors(WrapResponseInterceptor)
+// @UseGuards(ApiKeyGuard)
+@UseFilters(HttpExceptionFilter)
 @Controller('coffees')
 export class CoffeesController {
     // el servicio es lo que se encarga de la logica de negocio
     // y de itneractuar con la base de datos
     constructor(private readonly coffeesService: CoffeesService) {
-        console.log('CoffeesController initialized');
     }
+    
+    @Public()
     @Get()
-    findAll(@Query() paginationQueryDto: PaginationQueryDto) {
+    findAll(@Protocol() protocol: string, @Query() paginationQueryDto: PaginationQueryDto) {
         const { limit, offset } = paginationQueryDto;
+        console.log(`Protocol: ${protocol}`);
         return this.coffeesService.findAll(paginationQueryDto);
     }
-
+    @Public()
     @Get(':id')
-    findOne (@Param('id') id: string) {
+    findOne (@Param('id', ParseIntPipe) id: string) {
         return this.coffeesService.findOne(+id);
     }
 

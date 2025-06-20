@@ -23,9 +23,7 @@ export class CoffeesService {
         @Inject(COFFEE_BRANDS) coffeBrands: string[], // Inyectamos el token COFFEE_BRANDS
         @Inject(coffeesConfig.KEY)
         private readonly coffeesConfiguration: ConfigType<typeof coffeesConfig>, // Inyectamos ConfigService para acceder a las variables de entorno
-    ) { // Accedemos al objeto database del app.config.ts
-        console.log(coffeesConfig().foo);
-    };
+    ) {};
 
 
     async findAll(paginationQueryDto: PaginationQueryDto) {
