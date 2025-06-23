@@ -50,7 +50,6 @@ describe('[Feature] Coffees - /coffees', () => {
     );
 
     await app.init();
-    httpServer = app.getHttpServer();
   });
 
   it('Create [POST /]', () => {
