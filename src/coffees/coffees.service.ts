@@ -5,11 +5,11 @@ import { CreateCoffeeDto } from './dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm';
-import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
-import { Event } from 'src/events/entities/event.entity';
+import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
+import { Event } from '../events/entities/event.entity';
 import { COFFEE_BRANDS } from './coffee.constants';
 import { ConfigType } from '@nestjs/config';
-import coffeesConfig from 'src/coffee-rating/coffees.config';
+import coffeesConfig from '../coffee-rating/coffees.config';
 
 
 @Injectable()
@@ -20,12 +20,12 @@ export class CoffeesService {
         @InjectRepository(Flavor) // Si se usa Flavor en el servicio, se debe inyectar
         private readonly flavorRepository: Repository<Flavor>, // Si se usa Flavor en el servicio, se debe inyectar
         private readonly dataSource: DataSource,
-        @Inject(COFFEE_BRANDS) coffeBrands: string[], // Inyectamos el token COFFEE_BRANDS
-        @Inject(coffeesConfig.KEY)
-        private readonly coffeesConfiguration: ConfigType<typeof coffeesConfig>, // Inyectamos ConfigService para acceder a las variables de entorno
+        // @Inject(COFFEE_BRANDS) coffeBrands: string[], // Inyectamos el token COFFEE_BRANDS
+        // @Inject(coffeesConfig.KEY)
+        // private readonly coffeesConfiguration: ConfigType<typeof coffeesConfig>, // Inyectamos ConfigService para acceder a las variables de entorno
     ) {};
 
-
+    
     async findAll(paginationQueryDto: PaginationQueryDto) {
         return this.coffeeRepository.find({
             relations: {flavors: true},

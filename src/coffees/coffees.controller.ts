@@ -2,16 +2,18 @@ import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post
 import { CoffeesService } from './coffees.service';
 import { CreateCoffeeDto } from './dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto';
-import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
-import { Public } from 'src/common/decorators/public.decorator';
-import { HttpExceptionFilter } from 'src/common/filters/http-exception.filter';
-import { ApiKeyGuard } from 'src/common/guards/api-key.guard';
-import { WrapResponseInterceptor } from 'src/common/interceptors/wrap-response.interceptor';
-import { ParseIntPipe } from 'src/common/pipes/parse-int/parse-int.pipe';
-import { Protocol } from 'src/common/decorators/protocol.decorator';
+import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
+import { Public } from '../common/decorators/public.decorator';
+import { HttpExceptionFilter } from '../common/filters/http-exception.filter';
+import { ApiKeyGuard } from '../common/guards/api-key.guard';
+import { WrapResponseInterceptor } from '../common/interceptors/wrap-response.interceptor';
+import { ParseIntPipe } from '../common/pipes/parse-int/parse-int.pipe';
+import { Protocol } from '../common/decorators/protocol.decorator';
+import { ApiForbiddenResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 // @UseInterceptors(WrapResponseInterceptor)
 // @UseGuards(ApiKeyGuard)
+@ApiTags('coffees') // Swagger tag for grouping endpoints
 @UseFilters(HttpExceptionFilter)
 @Controller('coffees')
 export class CoffeesController {
@@ -20,6 +22,8 @@ export class CoffeesController {
     constructor(private readonly coffeesService: CoffeesService) {
     }
     
+    // @ApiResponse({status: 403, description: 'Forbidden.'})
+    @ApiForbiddenResponse({ description: 'Forbidden.' })
     @Public()
     @Get()
     findAll(@Protocol() protocol: string, @Query() paginationQueryDto: PaginationQueryDto) {

@@ -11,3 +11,12 @@ services:
       POSTGRES_DB: iluvcoffee_db
     ports:
       - "5432:5432"
+  test-db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: iluvcoffee_test
+      POSTGRES_PASSWORD: iluvcoffee_test
+      POSTGRES_DB: iluvcoffee_test_db
+    ports:
+      - "5433:5432"
